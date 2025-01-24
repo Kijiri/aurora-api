@@ -1,0 +1,10 @@
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: aurora-db
+      MYSQL_USER: aurora
+      MYSQL_PASSWORD: 123
+    ports:
+      - 3306:3306
