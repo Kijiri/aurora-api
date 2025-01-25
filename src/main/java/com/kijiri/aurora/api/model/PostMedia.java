@@ -24,10 +24,10 @@ public class PostMedia {
     private Media media;
 
 
-    @Column(nullable = false)
+    @Column(name = "grid_row", nullable = false)
     private int row;
 
-    @Column(nullable = false)
+    @Column(name = "grid_col", nullable = false)
     private int col;
 
     @Column(nullable = false)

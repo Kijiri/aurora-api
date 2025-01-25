@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "categories", uniqueConstraints = {
+@Table(uniqueConstraints = {
         @UniqueConstraint(name = "uk_category_name", columnNames = "name")
 })
 public class Category {

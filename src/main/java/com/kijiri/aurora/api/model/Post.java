@@ -54,6 +54,7 @@ public class Post {
     
     private Long likeCount = 0L;
     private Long commentCount = 0L;
+    private Long viewCount = 0L;
     private boolean edited;
     
     @Column(updatable = false, nullable = false)

@@ -21,10 +21,10 @@ public class PostContent {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
     
-    @Column(nullable = false)
+    @Column(name = "grid_row", nullable = false)
     private int row;
     
-    @Column(nullable = false)
+    @Column(name = "grid_col", nullable = false)
     private int col;
     
     @Column(nullable = false)

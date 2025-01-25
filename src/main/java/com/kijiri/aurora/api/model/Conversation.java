@@ -21,7 +21,7 @@ public class Conversation {
 
     @ManyToMany
     @JoinTable(
-            name = "conversation_participants",
+            name = "conversation_participant",
             joinColumns = @JoinColumn(name = "conversation_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
@@ -30,6 +30,8 @@ public class Conversation {
     @Column(nullable = false)
     private String title;
     private String avatarURL;
+    
+    private String role;
 
     @Column(updatable = false, nullable = false)
     @CreationTimestamp

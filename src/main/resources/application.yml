@@ -2,7 +2,7 @@ spring:
   application:
     name: aurora-api
   datasource:
-    url: jdbc:mysql://localhost:3306/aurora-db
+    url: jdbc:mysql://localhost:3306/aurora
     username: aurora
     password: 123
   jpa:

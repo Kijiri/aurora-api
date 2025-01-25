@@ -3,7 +3,7 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: aurora-db
+      MYSQL_DATABASE: aurora
       MYSQL_USER: aurora
       MYSQL_PASSWORD: 123
     ports:

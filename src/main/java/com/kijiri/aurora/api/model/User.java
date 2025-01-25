@@ -16,7 +16,8 @@ import java.util.List;
 @Entity
 @Table(indexes = {
         @Index(name = "idx_user_names", columnList = "last_name,first_name"),
-        @Index(name = "idx_user_first_name", columnList = "first_name")
+        @Index(name = "idx_user_first_name", columnList = "first_name"),
+        @Index(name = "idx_email", columnList = "email")
 })
 public class User {
     @Id
@@ -49,6 +50,7 @@ public class User {
     
     @Column(nullable = false)
     private boolean active;
+    //ACtive, unverified, locked
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
