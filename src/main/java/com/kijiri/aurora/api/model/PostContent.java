@@ -15,7 +15,7 @@ public class PostContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Post post;
     
     @Column(nullable = false, columnDefinition = "TEXT")

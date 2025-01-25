@@ -27,7 +27,7 @@ public class Post {
     private Long id;
     private String title;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
     
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
@@ -45,7 +45,7 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private Set<PostTag> postTags;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PostLike> postLikes;
 
     @Column(nullable = false)

@@ -50,6 +50,6 @@ public class User {
     @Column(nullable = false)
     private boolean active;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 }
