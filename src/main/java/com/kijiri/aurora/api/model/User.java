@@ -17,7 +17,8 @@ import java.util.List;
 @Table(indexes = {
         @Index(name = "idx_user_names", columnList = "last_name,first_name"),
         @Index(name = "idx_user_first_name", columnList = "first_name"),
-        @Index(name = "idx_email", columnList = "email")
+        @Index(name = "idx_email", columnList = "email"),
+        @Index(name = "idx_user_name", columnList = "user_name")
 })
 public class User {
     @Id
@@ -30,15 +31,20 @@ public class User {
     @Column(nullable = false)
     private String lastName;
     
+    @Column(nullable = false)
+    private String userName;
+    
     @Column(nullable = false, unique = true)
     private String email;
     
     @Column(nullable = false)
     private String hashedPassword;
     
+    private Integer age;
+    
     private String bio;
     
-    private String avatarURL;
+    private String avatarUrl;
     
     @Column(updatable = false, nullable = false)
     @CreationTimestamp

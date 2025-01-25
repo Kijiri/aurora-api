@@ -29,10 +29,11 @@ public class Conversation {
     
     @Column(nullable = false)
     private String title;
-    private String avatarURL;
+    private String avatarUrl;
     
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private ConversationRole conversationRole;
 
     @Column(updatable = false, nullable = false)
     @CreationTimestamp

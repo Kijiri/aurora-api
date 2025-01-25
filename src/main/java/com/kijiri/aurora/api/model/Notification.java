@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -24,7 +27,12 @@ public class Notification {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private NotificationType type;
-    
-    //TODO Bestämma hur vi ska göra med id till det notification handlar om t.ex comment id, post id
+
+    @Column(updatable = false, nullable = false)
+    @CreationTimestamp
+    private Instant createdAt;
+
+    @Column(nullable = false)
+    private Long notificationId;
     
 }

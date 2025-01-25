@@ -9,6 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"post_id", "tag_id"}, name = "uk_post_tag")
+})
 public class PostTag {
 
     @Id
