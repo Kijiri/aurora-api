@@ -49,8 +49,8 @@ public class User {
     private Instant updatedAt;
     
     @Column(nullable = false)
-    private boolean active;
-    //ACtive, unverified, locked
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;

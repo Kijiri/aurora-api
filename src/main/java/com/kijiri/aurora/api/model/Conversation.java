@@ -31,6 +31,7 @@ public class Conversation {
     private String title;
     private String avatarURL;
     
+    @Column(nullable = false)
     private String role;
 
     @Column(updatable = false, nullable = false)
