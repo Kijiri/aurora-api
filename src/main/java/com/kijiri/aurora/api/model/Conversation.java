@@ -19,22 +19,13 @@ public class Conversation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "conversation_participant",
-            joinColumns = @JoinColumn(name = "conversation_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<User> participants;
+    @OneToMany(mappedBy = "conversation")
+    private Set<ConversationParticipant> participants;
     
     @Column(nullable = false)
     private String title;
     private String avatarUrl;
     
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ConversationRole conversationRole;
-
     @Column(updatable = false, nullable = false)
     @CreationTimestamp
     private Instant creationDate;
