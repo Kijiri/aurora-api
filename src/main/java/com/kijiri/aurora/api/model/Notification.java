@@ -35,4 +35,5 @@ public class Notification {
     @Column(nullable = false)
     private Long notificationId;
     
+    private boolean read;
 }

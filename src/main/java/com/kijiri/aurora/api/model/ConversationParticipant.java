@@ -1,7 +1,13 @@
 package com.kijiri.aurora.api.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "conversation_id"}, name = "uk_user_conversation")
@@ -23,5 +29,7 @@ public class ConversationParticipant {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ConversationRole role;
+    
+    private boolean read;
 
 }
