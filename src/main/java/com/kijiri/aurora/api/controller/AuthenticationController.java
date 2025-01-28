@@ -1,8 +1,6 @@
 package com.kijiri.aurora.api.controller;
 
-import com.kijiri.aurora.api.dto.AuthenticationRequest;
-import com.kijiri.aurora.api.dto.AuthenticationResponse;
-import com.kijiri.aurora.api.dto.RegistrationRequest;
+import com.kijiri.aurora.api.dto.*;
 import com.kijiri.aurora.api.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +24,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request) {
-//        return ResponseEntity.ok(authenticationService(request));
-        return null;
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<String> refresh(@RequestBody String refreshToken) {
-        return null;
-//        return ResponseEntity.ok(authenticationService.refresh(refreshToken));
+    public ResponseEntity<RefreshTokenResponse> refresh(@RequestBody RefreshTokenRequest request) {
+        return ResponseEntity.ok(authenticationService.refreshToken(request));
     }
 }

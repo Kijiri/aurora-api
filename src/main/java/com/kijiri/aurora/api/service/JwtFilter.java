@@ -49,7 +49,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if (jwtService.isTokenValid(jwt, userDetails)) {
-
+                
                 //If we want to use @PreAuthorize with Id
                 Long userId = jwtService.extractUserId(jwt);
                 Map<String, Object> details = new HashMap<>();
