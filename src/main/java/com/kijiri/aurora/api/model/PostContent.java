@@ -16,7 +16,7 @@ public class PostContent {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    private Post post;
+    private PostSection postSection;
     
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;

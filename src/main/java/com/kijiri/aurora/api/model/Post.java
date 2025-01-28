@@ -34,10 +34,7 @@ public class Post {
     private List<Comment> comments;
     
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostContent> contentList;
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostMedia> mediaList;
+    private List<PostSection> sections;
     
     @ManyToOne
     private User user;

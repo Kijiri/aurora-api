@@ -30,6 +30,6 @@ public class ConversationParticipant {
     @Enumerated(EnumType.STRING)
     private ConversationRole role;
     
-    private boolean read;
+    private boolean isRead;
 
 }
