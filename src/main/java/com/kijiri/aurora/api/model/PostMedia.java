@@ -16,14 +16,13 @@ public class PostMedia {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
-    private Post post;
+    @JoinColumn(name = "post_section_id", nullable = false)
+    private PostSection postSection;
 
     @ManyToOne
     @JoinColumn(name = "media_id", nullable = false)
     private Media media;
-
-
+    
     @Column(name = "grid_row", nullable = false)
     private int row;
 
