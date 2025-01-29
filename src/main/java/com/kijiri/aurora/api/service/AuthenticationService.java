@@ -2,10 +2,14 @@ package com.kijiri.aurora.api.service;
 
 import com.kijiri.aurora.api.dto.*;
 import com.kijiri.aurora.api.model.Role;
+import com.kijiri.aurora.api.model.RoleType;
 import com.kijiri.aurora.api.model.User;
 import com.kijiri.aurora.api.model.UserStatus;
 import com.kijiri.aurora.api.repository.RoleRepository;
 import com.kijiri.aurora.api.repository.UserRepository;
+import com.kijiri.aurora.api.request.AuthenticationRequest;
+import com.kijiri.aurora.api.request.RefreshTokenRequest;
+import com.kijiri.aurora.api.request.RegistrationRequest;
 import com.kijiri.aurora.api.shared.enums.BusinessErrorCodes;
 import com.kijiri.aurora.api.shared.exception.DuplicateException;
 import com.kijiri.aurora.api.shared.exception.ResourceNotFoundException;
@@ -33,23 +37,9 @@ public class AuthenticationService {
     public void register(RegistrationRequest request) {
         log.info("Registering user with email: {}", request.getEmail());
         
-        if (userRepository.existsByEmail(request.getEmail())) {
-            log.warn("Email already taken: {}", request.getEmail());
-            throw new DuplicateException(
-                    BusinessErrorCodes.EMAIL_TAKEN,
-                    String.format("Email is taken for: %s", request.getEmail())
-            );
-        }
-        
-        if (userRepository.existsByUserName(request.getUserName())) {
-            log.warn("Username already taken: {}", request.getUserName());
-            throw new DuplicateException(
-                    BusinessErrorCodes.USERNAME_TAKEN,
-                    String.format("Username is taken for: %s", request.getUserName())
-            );
-        }
+        validateRegistration(request);
 
-        Role role = roleRepository.findByName("USER")
+        Role role = roleRepository.findByName(RoleType.USER)
                 .orElseThrow(() -> {
                     log.error("USER role not initialized");
                     return new ResourceNotFoundException(BusinessErrorCodes.RESOURCE_NOT_FOUND, "USER role not initialized");
@@ -66,9 +56,26 @@ public class AuthenticationService {
                 .roles(List.of(role))
                 .build();
         
-        
         userRepository.save(user);
         log.info("User registered successfully with email: {}", request.getEmail());
+    }
+
+    private void validateRegistration(RegistrationRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            log.warn("Email already taken: {}", request.getEmail());
+            throw new DuplicateException(
+                    BusinessErrorCodes.EMAIL_TAKEN,
+                    String.format("Email is taken for: %s", request.getEmail())
+            );
+        }
+
+        if (userRepository.existsByUserName(request.getUserName())) {
+            log.warn("Username already taken: {}", request.getUserName());
+            throw new DuplicateException(
+                    BusinessErrorCodes.USERNAME_TAKEN,
+                    String.format("Username is taken for: %s", request.getUserName())
+            );
+        }
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {

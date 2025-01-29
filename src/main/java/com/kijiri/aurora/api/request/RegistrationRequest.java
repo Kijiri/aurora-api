@@ -1,4 +1,4 @@
-package com.kijiri.aurora.api.dto;
+package com.kijiri.aurora.api.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

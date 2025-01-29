@@ -1,6 +1,7 @@
 package com.kijiri.aurora.api;
 
 import com.kijiri.aurora.api.model.Role;
+import com.kijiri.aurora.api.model.RoleType;
 import com.kijiri.aurora.api.repository.RoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,13 +18,12 @@ public class AuroraApiApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
 		return args -> {
-			if (roleRepository.findByName("USER").isEmpty()) {
-				roleRepository.save(Role.builder().name("USER").build());
+			if (roleRepository.findByName(RoleType.USER).isEmpty()) {
+				roleRepository.save(Role.builder().name(RoleType.USER).build());
 			}
-			if (roleRepository.findByName("ADMIN").isEmpty()) {
-				roleRepository.save(Role.builder().name("ADMIN").build());
+			if (roleRepository.findByName(RoleType.ADMIN).isEmpty()) {
+				roleRepository.save(Role.builder().name(RoleType.ADMIN).build());
 			}
 		};
 	}
-
 }

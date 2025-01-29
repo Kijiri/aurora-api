@@ -1,4 +1,4 @@
-package com.kijiri.aurora.api.dto;
+package com.kijiri.aurora.api.request;
 
 import lombok.Getter;
 import lombok.Setter;

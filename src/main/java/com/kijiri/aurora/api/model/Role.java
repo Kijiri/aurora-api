@@ -20,9 +20,10 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @Enumerated(EnumType.STRING)
     @Column(unique = true)
-    private String name;
+    private RoleType name;
     
     @ManyToMany(mappedBy = "roles")
     @JsonIgnore

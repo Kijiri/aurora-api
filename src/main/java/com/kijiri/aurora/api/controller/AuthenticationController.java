@@ -1,6 +1,9 @@
 package com.kijiri.aurora.api.controller;
 
 import com.kijiri.aurora.api.dto.*;
+import com.kijiri.aurora.api.request.AuthenticationRequest;
+import com.kijiri.aurora.api.request.RefreshTokenRequest;
+import com.kijiri.aurora.api.request.RegistrationRequest;
 import com.kijiri.aurora.api.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

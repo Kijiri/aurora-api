@@ -22,3 +22,7 @@ logging:
   level:
     root: INFO
     com.kijiri.aurora.api: DEBUG
+aurora:
+  api:
+    auth:
+      url: http://localhost:4200
