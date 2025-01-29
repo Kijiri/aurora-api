@@ -1,5 +1,7 @@
-package com.kijiri.aurora.api.shared.exception;
+package com.kijiri.aurora.api.controller.advice;
 
+import com.kijiri.aurora.api.shared.exception.BaseException;
+import com.kijiri.aurora.api.shared.exception.ExceptionResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

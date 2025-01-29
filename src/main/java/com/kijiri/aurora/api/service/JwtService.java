@@ -32,17 +32,14 @@ public class JwtService {
     private String secretKey;
 
     public String generateToken(UserDetails userDetails) {
-        log.info("Generating JWT token for user: {}", userDetails.getUsername());
         return generateToken(new HashMap<>(), userDetails);
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
-        log.info("Generating refresh token for user: {}", userDetails.getUsername());
         return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
 
     public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
-        log.info("Generating JWT token with claims for user: {}", userDetails.getUsername());
         return buildToken(claims, userDetails, jwtExpiration);
     }
 
@@ -53,7 +50,7 @@ public class JwtService {
                 .toList();
         claims.put("userId", ((User) userDetails).getId());
 
-        String token = Jwts
+        return Jwts
                 .builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
@@ -62,36 +59,20 @@ public class JwtService {
                 .claim("authorities", authorities)
                 .signWith(getSignInKey())
                 .compact();
-
-        log.info("JWT token generated for user: {}", userDetails.getUsername());
-        return token;
     }
 
     public String createNewAccessToken(String refreshToken) {
-        log.info("Attempting to refresh access token using refresh token: {}", refreshToken);
-        
         final String username = extractUsername(refreshToken);
         if (username != null && isTokenActive(refreshToken)) {
             UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
-            String newAccessToken = generateToken(userDetails);
-            log.info("New access token generated for user: {}", username);
-            return newAccessToken;
+            return generateToken(userDetails);
         }
-        log.warn("Failed to refresh token. Invalid or expired refresh token: {}", refreshToken);
         return null;
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        log.info("Validating token for user: {}", userDetails.getUsername());
         final String username = extractUsername(token);
-        
-        boolean isValid = username.equals(userDetails.getUsername()) && isTokenActive(token);
-        if (isValid) {
-            log.info("Token is valid for user: {}", userDetails.getUsername());
-        } else {
-            log.warn("Token validation failed for user: {}", userDetails.getUsername());
-        }
-        return isValid;
+        return username.equals(userDetails.getUsername()) && isTokenActive(token);
     }
 
     private boolean isTokenActive(String token) {
@@ -111,13 +92,11 @@ public class JwtService {
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
-        log.info("Extracting claim from token");
         final Claims claims = extractAllClaims(token);
         return claimResolver.apply(claims);
     }
 
     private Claims extractAllClaims(String token) {
-        log.info("Extracting all claims from token");
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())

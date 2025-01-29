@@ -6,12 +6,12 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum BusinessErrorCodes {
 
-    USERNAME_TAKEN(101, HttpStatus.CONFLICT, "Username is taken"),
-    EMAIL_TAKEN(102, HttpStatus.CONFLICT, "Email is taken"),
-    USER_NOT_FOUND(103, HttpStatus.NOT_FOUND, "No account found with that email or username"),
+    USERNAME_TAKEN(1001, HttpStatus.CONFLICT, "Username is taken"),
+    EMAIL_TAKEN(1002, HttpStatus.CONFLICT, "Email is taken"),
+    USER_NOT_FOUND(1003, HttpStatus.NOT_FOUND, "No account found with that email or username"),
 
 
-    RESOURCE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "Resource not found");
+    RESOURCE_NOT_FOUND(1404, HttpStatus.NOT_FOUND, "Resource not found");
 
 
     private final int code;

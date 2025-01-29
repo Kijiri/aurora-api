@@ -7,9 +7,9 @@ import com.kijiri.aurora.api.model.User;
 import com.kijiri.aurora.api.model.UserStatus;
 import com.kijiri.aurora.api.repository.RoleRepository;
 import com.kijiri.aurora.api.repository.UserRepository;
-import com.kijiri.aurora.api.request.AuthenticationRequest;
-import com.kijiri.aurora.api.request.RefreshTokenRequest;
-import com.kijiri.aurora.api.request.RegistrationRequest;
+import com.kijiri.aurora.api.controller.request.AuthenticationRequest;
+import com.kijiri.aurora.api.controller.request.RefreshTokenRequest;
+import com.kijiri.aurora.api.controller.request.RegistrationRequest;
 import com.kijiri.aurora.api.shared.enums.BusinessErrorCodes;
 import com.kijiri.aurora.api.shared.exception.DuplicateException;
 import com.kijiri.aurora.api.shared.exception.ResourceNotFoundException;
@@ -93,7 +93,6 @@ public class AuthenticationService {
             String accessToken = jwtService.generateToken(user);
             String refreshToken = jwtService.generateRefreshToken(user);
             
-            //TODO mapper - mapstruct or custom?
             UserDTO userDTO = UserDTO.builder()
                     .id(user.getId()).build();
 
@@ -108,11 +107,11 @@ public class AuthenticationService {
         }
 
     public RefreshTokenResponse refreshToken(RefreshTokenRequest request) {
-        log.info("Refreshing token for refreshToken: {}", request.getRefreshToken());
+        log.debug("Refreshing token for refreshToken: {}", request.getRefreshToken());
         
         String newAccessToken = jwtService.createNewAccessToken(request.getRefreshToken());
 
-        log.info("New access token generated");
+        log.debug("New access token generated");
         return new RefreshTokenResponse(newAccessToken);
     }
 }
