@@ -30,20 +30,17 @@ public class User implements UserDetails, Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(nullable = false)
+
     private String firstName;
-    
-    @Column(nullable = false)
+
     private String lastName;
     
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String userName;
     
     @Column(nullable = false, unique = true)
     private String email;
-    
-    @Column(nullable = false)
+
     private String hashedPassword;
     
     private Integer age;
@@ -69,6 +66,10 @@ public class User implements UserDetails, Principal {
     
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private LoginType loginType;
 
     @Override
     public String getName() {

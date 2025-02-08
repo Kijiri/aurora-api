@@ -10,7 +10,7 @@ public enum BusinessErrorCodes {
     EMAIL_TAKEN(1002, HttpStatus.CONFLICT, "Email is taken"),
     USER_NOT_FOUND(1003, HttpStatus.NOT_FOUND, "No account found with that email or username"),
 
-
+    EMAIL_UNVERIFIED(1403, HttpStatus.FORBIDDEN, "Unverified email"),
     RESOURCE_NOT_FOUND(1404, HttpStatus.NOT_FOUND, "Resource not found");
 
 
