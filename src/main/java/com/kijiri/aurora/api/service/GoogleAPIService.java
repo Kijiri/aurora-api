@@ -1,6 +1,5 @@
 package com.kijiri.aurora.api.service;
 
-import com.kijiri.aurora.api.dto.UserDTO;
 import com.kijiri.aurora.api.integration.GoogleAPIWebClient;
 import com.kijiri.aurora.api.integration.GoogleAccessToken;
 import com.kijiri.aurora.api.integration.GoogleUser;
@@ -15,11 +14,11 @@ public class GoogleAPIService {
     }
 
     public GoogleUser fetchGoogleUser(String authCode, String codeVerifier) {
-        GoogleAccessToken googleAccessToken = verifyToken(authCode, codeVerifier);
+        GoogleAccessToken googleAccessToken = fetchAccessToken(authCode, codeVerifier);
         return googleOauth2WebClient.fetchUserDetails(googleAccessToken);
     }
 
-    private GoogleAccessToken verifyToken(String authCode, String codeVerifier) {
-        return googleOauth2WebClient.exchangeAuthCodeForToken(authCode, codeVerifier);
+    private GoogleAccessToken fetchAccessToken(String authCode, String codeVerifier) {
+        return googleOauth2WebClient.fetchAuthToken(authCode, codeVerifier);
     }
 }

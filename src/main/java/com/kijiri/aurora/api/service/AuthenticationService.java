@@ -34,7 +34,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    private final GoogleAPIService googleOauthService;
+    private final GoogleAPIService googleAPIService;
 
     public void register(RegistrationRequest request) {
         log.info("Registering user with email: {}", request.getEmail());
@@ -74,14 +74,14 @@ public class AuthenticationService {
         return authenticationResponse;
     }
 
-    public Object authenticateByGoogle(Oauth2Request oauth2Request) {
-        GoogleUser googleUser = googleOauthService.fetchGoogleUser(oauth2Request.getAuthCode(),
+    public AuthenticationResponse authenticateByGoogle(Oauth2Request oauth2Request) {
+        GoogleUser googleUser = googleAPIService.fetchGoogleUser(oauth2Request.getAuthCode(),
             oauth2Request.getCodeVerifier());
-        if(!googleUser.getEmail_verified()) {
+        if (!googleUser.getEmail_verified()) {
             throw new ForbiddenException(EMAIL_UNVERIFIED, "User has unverified Gmail");
         }
         User user = userRepository.findByEmail(googleUser.getEmail())
-            .orElse(registerGoogleUser(googleUser));
+            .orElseGet(() -> registerGoogleUser(googleUser));
 
         return getAuthenticationResponse(user);
     }

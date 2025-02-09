@@ -39,7 +39,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate/google")
-    public ResponseEntity<Object> googleAuthenticate(@RequestBody Oauth2Request oauth2Request) {
+    public ResponseEntity<AuthenticationResponse> googleAuthenticate(@RequestBody Oauth2Request oauth2Request) {
         return ResponseEntity.ok(authenticationService.authenticateByGoogle(oauth2Request));
     }
 }
